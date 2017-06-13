@@ -43,7 +43,6 @@ app.get("/todos/:id", (request, response) => {
         return response.status(404).send("Object ID not valid");
     }
     Todo.findById( id ).then((todo) => {
-        console.log("Found this ObjectID");
         if(!todo){
             return response.status(404).send();
         }
@@ -53,6 +52,21 @@ app.get("/todos/:id", (request, response) => {
     });
 });
 
+app.delete("/todos/:id", (request, response) => {
+    var id = request.params.id;
+    if(!ObjectID.isValid(id))
+    {
+        return response.status(404).send("Object ID not valid");
+    }
+    Todo.findByIdAndRemove(id).then((todo) => {
+        if(!todo){
+            return response.status(404).send("Object ID not found");
+        }
+        response.status(200).send({todo});
+    }).catch((error) => {
+        response.status(404).send("Some probelem with the object ID");
+    });
+});
 
 app.post('/user', (request, response) => {
     var user = new User({
