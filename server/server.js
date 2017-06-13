@@ -24,16 +24,27 @@ app.post('/todos', (request, response) => {
 
 });
 
+app.get('/todos', (request, response) => {
+    Todo.find().then((todos) => {
+        response.send({todos});
+        console.log("All todos sent successfully.");
+    }, (error) => {
+        res.status(400).send(error);
+        console.log("Error fetching todo list : ", error);
+    });
+});
+
+
 app.post('/user', (request, response) => {
     var user = new User({
         name: request.body.name,
         email: request.body.email,
     });
 
-    user.save().then((resolve)=>{
+    user.save().then((resolve) => {
         response.send(resolve);
         console.log("User saved successfully");
-    }, (reject)=>{
+    }, (reject) => {
         response.status(400).send(reject);
         console.log("User not saved");
     });
@@ -48,3 +59,5 @@ app.get('/todos', (request, response) => {
 app.listen(3000, () => {
     console.log("Started on port 3000");
 });
+
+module.exports = { app };
