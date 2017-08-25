@@ -18,6 +18,6 @@ Methods used and their structures:
 3. GET (`/todos/objectID`) : To get a specific todo document from todos collection using ObjectID as search parameter.
 4. PATCH (`/todos/objectID`) : To update the value of completedAt of the given todo item using ObjectID as search parameter.
 
-To hit the live version of the application hit https://backend-todo.herokuapp.com/
+To hit the live version of the application use https://backend-todo.herokuapp.com/
 
 ###### Since the dynos on heroku sleep after 1 hour of inactivity, the app may be slow to load if loaded for first time within the given hour.
